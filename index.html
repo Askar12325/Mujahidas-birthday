@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mujahida — Happy Birthday | Ishaq's Eternal Obsession</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Three.js CDN for 3D Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-[#060508] text-neutral-200 antialiased selection:bg-amber-500/30 selection:text-amber-200 min-h-screen relative overflow-x-hidden">
+
+  <!-- Ambient Radial Glows -->
+  <div class="bg-ambient-lights"></div>
+
+  <!-- Three.js 3D Background Canvas -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- Custom Glowing Cursor (Desktop Only) -->
+  <div class="custom-cursor-dot hidden md:block"></div>
+  <div class="custom-cursor-ring hidden md:block"></div>
+
+  <!-- ==========================================
+       TOP NAVIGATION BAR
+       ========================================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-amber-500/20 px-4 sm:px-8 py-3.5 transition-all">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Brand Crest -->
+      <a href="#hero" class="flex items-center gap-2 group">
+        <div class="w-8 h-8 rounded-full border border-amber-400/50 flex items-center justify-center bg-black/60 shadow-[0_0_12px_rgba(212,175,55,0.4)] group-hover:scale-105 transition-transform">
+          <span class="font-cinzel text-xs font-bold text-amber-300">I&M</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-cinzel text-xs sm:text-sm tracking-[0.25em] text-gold-gradient font-bold uppercase">
+            Ishaq & Mujahida
+          </span>
+          <span class="text-[9px] tracking-widest text-neutral-400 uppercase font-light">
+            A Toxic Romance Affair
+          </span>
+        </div>
+      </a>
+
+      <!-- Quick Nav Links -->
+      <nav class="hidden md:flex items-center gap-7 text-xs font-medium tracking-widest uppercase">
+        <a href="#about" class="text-neutral-400 hover:text-amber-300 transition-colors">Chemistry</a>
+        <a href="#gallery" class="text-neutral-400 hover:text-amber-300 transition-colors">The Vault (3D)</a>
+        <a href="#letter" class="text-neutral-400 hover:text-amber-300 transition-colors">Ishaq's Letter</a>
+        <a href="#vow" class="text-neutral-400 hover:text-amber-300 transition-colors">The Flame</a>
+      </nav>
+
+      <!-- Intimate Audio Toggle -->
+      <div class="flex items-center gap-3">
+        <button id="audio-toggle-btn" class="glass-panel hover:border-amber-400/60 px-3.5 py-1.5 rounded-full flex items-center gap-2.5 transition-all text-xs text-amber-300 shadow-[0_0_15px_rgba(212,175,55,0.15)] group" title="Toggle sensual dark romance soundtrack">
+          <div id="audio-eq" class="flex items-end gap-0.5 h-3.5 opacity-30 transition-opacity">
+            <span class="eq-bar w-1 bg-amber-400 rounded-full"></span>
+            <span class="eq-bar w-1 bg-amber-300 rounded-full"></span>
+            <span class="eq-bar w-1 bg-red-400 rounded-full"></span>
+            <span class="eq-bar w-1 bg-amber-500 rounded-full"></span>
+          </div>
+          <span id="audio-label" class="tracking-wider uppercase text-[10px] font-semibold hidden sm:inline">Intimate Mood: OFF</span>
+          <i data-lucide="music" class="w-3.5 h-3.5 text-amber-300 group-hover:rotate-12 transition-transform"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==========================================
+       SECTION 1: HERO
+       ========================================== -->
+  <main class="relative z-10">
+    <section id="hero" class="min-h-screen flex items-center justify-center pt-24 pb-16 px-4 sm:px-6 relative overflow-hidden">
+      
+      <div class="max-w-4xl mx-auto text-center space-y-7">
+        
+        <!-- Subtle Poison Pill Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel-crimson border-amber-500/30 text-xs tracking-[0.25em] uppercase text-amber-300 animate-pulse">
+          <span class="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_#ff0055]"></span>
+          <span>Happy Birthday My Favorite Chaos</span>
+          <span class="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_#ffd700]"></span>
+        </div>
+
+        <!-- Grand Title -->
+        <div class="space-y-3">
+          <h2 class="font-cinzel text-xs sm:text-sm tracking-[0.4em] uppercase text-neutral-400">
+            To The One Who Holds The Reins Of My Sanity
+          </h2>
+          <h1 class="font-playfair text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-gold-gradient leading-tight">
+            MUJAHIDA
+          </h1>
+          <p class="font-cursive text-3xl sm:text-4xl md:text-5xl text-red-300/90 font-normal pt-1">
+            Happy Birthday, My Sweet Poison
+          </p>
+        </div>
+
+        <!-- Romantic Toxic Quote -->
+        <p class="font-playfair italic text-base sm:text-xl text-neutral-300 max-w-2xl mx-auto leading-relaxed border-l-2 border-r-2 border-amber-500/30 px-6 py-2 bg-black/30 backdrop-blur-sm rounded-lg">
+          &ldquo;We drive each other to the brink of madness, we set fire to peace, yet I would rather wage war with you every single day than live in quiet harmony with anyone else in this world.&rdquo;
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-3">
+          <a href="#gallery" class="px-7 py-3 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-600 text-black font-semibold text-xs tracking-widest uppercase hover:brightness-110 transition-all shadow-[0_0_25px_rgba(212,175,55,0.4)] flex items-center gap-2 group">
+            <span>Explore The 3D Vault</span>
+            <i data-lucide="sparkles" class="w-4 h-4 group-hover:rotate-45 transition-transform"></i>
+          </a>
+          
+          <a href="#letter" class="px-7 py-3 rounded-full glass-panel hover:border-amber-400/60 text-amber-200 font-semibold text-xs tracking-widest uppercase transition-all flex items-center gap-2 group">
+            <i data-lucide="mail" class="w-4 h-4 text-amber-300 group-hover:scale-110 transition-transform"></i>
+            <span>Open Ishaq's Letter</span>
+          </a>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="pt-10 flex flex-col items-center gap-2 text-neutral-500 text-[11px] tracking-widest uppercase">
+          <span>Descend Into The Fire</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 animate-bounce text-amber-400/70"></i>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2: OUR TOXIC CHEMISTRY
+         ========================================== -->
+    <section id="about" class="py-24 px-4 sm:px-6 relative">
+      <div class="max-w-6xl mx-auto space-y-16">
+        
+        <div class="text-center space-y-3">
+          <span class="text-xs font-cinzel tracking-[0.3em] uppercase text-amber-400/90">
+            Passionate • Unforgiving • Eternal
+          </span>
+          <h2 class="font-cinzel text-3xl sm:text-4xl text-neutral-100 font-bold">
+            The Rules of Our Fire
+          </h2>
+          <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          
+          <!-- Pillar 1 -->
+          <div class="glass-panel p-7 rounded-2xl space-y-4 hover:border-amber-400/40 transition-all tilt-card group">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-950/80 to-black border border-red-500/30 flex items-center justify-center shadow-[0_0_15px_rgba(132,16,38,0.3)] group-hover:scale-110 transition-transform">
+              <i data-lucide="flame" class="w-6 h-6 text-red-400"></i>
+            </div>
+            <h3 class="font-cinzel text-lg font-bold text-amber-300">
+              01. Sweetest Poison
+            </h3>
+            <p class="text-neutral-400 text-sm leading-relaxed">
+              We fight like tempests, clash like steel, and test every limit known to man. But the moment silence falls, the craving pulls us right back into the blaze.
+            </p>
+            <div class="pt-2 text-xs font-playfair italic text-amber-200/70">
+              "Addiction needs no explanation."
+            </div>
+          </div>
+
+          <!-- Pillar 2 (Centerpiece Highlight) -->
+          <div class="glass-panel-crimson p-7 rounded-2xl space-y-4 border-amber-500/40 hover:border-amber-400/70 transition-all tilt-card group relative">
+            <div class="absolute -top-3 right-6 px-3 py-0.5 rounded-full bg-gradient-to-r from-amber-500 to-yellow-600 text-black text-[10px] font-bold uppercase tracking-wider">
+              Bound By Gold
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-950/80 to-black border border-amber-500/40 flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:scale-110 transition-transform">
+              <i data-lucide="crown" class="w-6 h-6 text-amber-300"></i>
+            </div>
+            <h3 class="font-cinzel text-lg font-bold text-gold-gradient">
+              02. The Sovereign Queen
+            </h3>
+            <p class="text-neutral-300 text-sm leading-relaxed">
+              Mujahida doesn’t just walk into a room — she conquers it. Every glance she casts is an unspoken command, and Ishaq is proudly her most loyal prisoner.
+            </p>
+            <div class="pt-2 text-xs font-playfair italic text-red-300/80">
+              "Heavy is the crown, but she wears it like stardust."
+            </div>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="glass-panel p-7 rounded-2xl space-y-4 hover:border-amber-400/40 transition-all tilt-card group">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-950/80 to-black border border-red-500/30 flex items-center justify-center shadow-[0_0_15px_rgba(132,16,38,0.3)] group-hover:scale-110 transition-transform">
+              <i data-lucide="heart-crack" class="w-6 h-6 text-red-400"></i>
+            </div>
+            <h3 class="font-cinzel text-lg font-bold text-amber-300">
+              03. Never Peace, Always Us
+            </h3>
+            <p class="text-neutral-400 text-sm leading-relaxed">
+              Peace is for people who love half-heartedly. We love with teeth and claws, with midnight promises, and an unbreakable grip that defies everything in this world.
+            </p>
+            <div class="pt-2 text-xs font-playfair italic text-amber-200/70">
+              "Forever Ishaq’s sweetest nightmare."
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 3: THE 3D NON-SCROLLING MEDIA VAULT
+         User requested: "make the image /vidoe section unique it shouldnt be scrollong make it really beautiful"
+         ========================================== -->
+    <section id="gallery" class="py-24 px-4 sm:px-6 relative overflow-hidden">
+      <div class="max-w-6xl mx-auto space-y-10">
+        
+        <!-- Header -->
+        <div class="text-center space-y-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-semibold tracking-widest uppercase">
+            <i data-lucide="film" class="w-3.5 h-3.5"></i>
+            <span>Interactive 3D Spatial Deck</span>
+          </div>
+          <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-gold-gradient">
+            The Obsidian Vault
+          </h2>
+          <p class="text-neutral-400 text-sm sm:text-base max-w-xl mx-auto">
+            A curated theater of our moments. Click through the cards, toggle sound, or enter Cinema Mode.
+          </p>
+        </div>
+
+        <!-- 3D Stage Wrapper -->
+        <div class="relative stage-container py-6">
+          
+          <!-- Outer Decorative Frame with Gold Shimmer -->
+          <div class="relative w-full max-w-4xl mx-auto h-[480px] sm:h-[540px] md:h-[580px] flex items-center justify-center">
+
+            <!-- Card 0: MUJA-1.jpeg (Photo of them together) -->
+            <div class="media-3d-card absolute inset-0 w-full h-full rounded-2xl overflow-hidden glass-panel border transition-all duration-700 select-none" data-index="0">
+              <div class="relative w-full h-full bg-black/80 flex items-center justify-center overflow-hidden group">
+                <img src="MUJA-1.jpeg" alt="Ishaq & Mujahida" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                <div class="absolute top-4 left-4">
+                  <span class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 text-[11px] font-bold tracking-wider uppercase">
+                    ⭐ Ishaq × Mujahida • Together
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 1: MUJA-2.mp4 (Video 1) -->
+            <div class="media-3d-card absolute inset-0 w-full h-full rounded-2xl overflow-hidden glass-panel border transition-all duration-700 select-none" data-index="1">
+              <div class="relative w-full h-full bg-black/80 flex items-center justify-center overflow-hidden">
+                <video src="MUJA-2.mp4" class="w-full h-full object-cover object-center" loop muted playsinline></video>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent pointer-events-none"></div>
+                <div class="absolute top-4 left-4">
+                  <span class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 text-[11px] font-bold tracking-wider uppercase">
+                    ✨ Her Radiance • Film
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: MUJA-3.mp4 (Video 2) -->
+            <div class="media-3d-card absolute inset-0 w-full h-full rounded-2xl overflow-hidden glass-panel border transition-all duration-700 select-none" data-index="2">
+              <div class="relative w-full h-full bg-black/80 flex items-center justify-center overflow-hidden">
+                <video src="MUJA-3.mp4" class="w-full h-full object-cover object-center" loop muted playsinline></video>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent pointer-events-none"></div>
+                <div class="absolute top-4 left-4">
+                  <span class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 text-[11px] font-bold tracking-wider uppercase">
+                    🔥 The Obsession • Film
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3: MUJA-4.mp4 (Video 3 - Together) -->
+            <div class="media-3d-card absolute inset-0 w-full h-full rounded-2xl overflow-hidden glass-panel border transition-all duration-700 select-none" data-index="3">
+              <div class="relative w-full h-full bg-black/80 flex items-center justify-center overflow-hidden">
+                <video src="MUJA-4.mp4" class="w-full h-full object-cover object-center" loop muted playsinline></video>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent pointer-events-none"></div>
+                <div class="absolute top-4 left-4">
+                  <span class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 text-[11px] font-bold tracking-wider uppercase">
+                    🌹 Bound In Fire • Together
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Left & Right 3D Stage Navigation Buttons -->
+            <button id="stage-prev-btn" class="absolute -left-3 sm:-left-6 top-1/2 -translate-y-1/2 z-40 w-12 h-12 rounded-full glass-panel hover:border-amber-400/70 flex items-center justify-center text-amber-300 hover:scale-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(0,0,0,0.8)]" aria-label="Previous Media">
+              <i data-lucide="chevron-left" class="w-6 h-6"></i>
+            </button>
+            <button id="stage-next-btn" class="absolute -right-3 sm:-right-6 top-1/2 -translate-y-1/2 z-40 w-12 h-12 rounded-full glass-panel hover:border-amber-400/70 flex items-center justify-center text-amber-300 hover:scale-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(0,0,0,0.8)]" aria-label="Next Media">
+              <i data-lucide="chevron-right" class="w-6 h-6"></i>
+            </button>
+
+          </div>
+
+          <!-- Dynamic Info & Interactive Controls Beneath Stage -->
+          <div class="max-w-2xl mx-auto mt-8 glass-panel p-6 rounded-2xl space-y-4 border-gold-glow">
+            
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+              <div class="flex items-center gap-2">
+                <span id="stage-badge" class="px-2.5 py-0.5 rounded-full bg-red-950/70 text-red-300 border border-red-500/30 text-[10px] uppercase font-bold tracking-wider">
+                  Ishaq & Mujahida
+                </span>
+                <span id="stage-counter" class="text-xs font-mono text-amber-400 font-bold">
+                  01 / 04
+                </span>
+              </div>
+
+              <!-- Quick Control Bar -->
+              <div class="flex items-center gap-2">
+                <button id="stage-play-toggle" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-amber-300 transition-colors" title="Play / Pause Active Video">
+                  <i data-lucide="play" class="w-4 h-4"></i>
+                </button>
+                <button id="stage-sound-toggle" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-amber-300 transition-colors" title="Toggle Video Audio">
+                  <i data-lucide="volume-x" class="w-4 h-4 text-gray-400"></i>
+                </button>
+                <button id="stage-cinema-btn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-amber-500/20 to-yellow-600/20 hover:from-amber-500/30 hover:to-yellow-600/30 border border-amber-400/40 text-amber-200 text-xs font-semibold tracking-wider transition-all">
+                  <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                  <span>Cinema View</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Active Card Title & Sensual Caption -->
+            <div class="space-y-1">
+              <h3 id="stage-title" class="font-cinzel text-xl font-bold text-amber-200">
+                The Collision of Two Souls
+              </h3>
+              <p id="stage-caption" class="text-neutral-400 text-sm font-playfair italic leading-relaxed">
+                Where quiet calm was set ablaze. No ordinary love — a gilded, intoxicating storm.
+              </p>
+            </div>
+
+            <!-- Interactive Direct Selectors -->
+            <div class="flex flex-wrap items-center justify-center gap-2 pt-2">
+              <button class="stage-indicator" data-step="0">01. Our Photo</button>
+              <button class="stage-indicator" data-step="1">02. Her Radiance</button>
+              <button class="stage-indicator" data-step="2">03. The Heat</button>
+              <button class="stage-indicator" data-step="3">04. Two In Storm</button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         CINEMA THEATER MODAL (FULL EXPERIENCE)
+         ========================================== -->
+    <div id="cinema-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl hidden items-center justify-center p-4 sm:p-8">
+      <div class="relative w-full max-w-4xl glass-panel p-6 rounded-2xl space-y-4 border border-amber-500/40">
+        
+        <div class="flex items-center justify-between border-b border-amber-500/20 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span>
+            <span class="font-cinzel text-xs tracking-widest uppercase text-amber-300 font-bold">Cinema Theater • High Definition</span>
+          </div>
+          <button id="cinema-close" class="p-2 rounded-full hover:bg-white/10 text-neutral-400 hover:text-white transition-colors">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <div id="cinema-media-container" class="w-full flex items-center justify-center overflow-hidden rounded-xl bg-black/60 min-h-[300px]">
+          <!-- Injected via app.js -->
+        </div>
+
+        <div class="text-center space-y-1 pt-2">
+          <h4 id="cinema-title" class="font-cinzel text-lg font-bold text-amber-200"></h4>
+          <p id="cinema-caption" class="text-neutral-400 text-xs sm:text-sm font-playfair italic"></p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SECTION 4: THE SWEET LETTER (WAX SEAL INTERACTION)
+         User requested: "they should be a swwet lettter"
+         ========================================== -->
+    <section id="letter" class="py-24 px-4 sm:px-6 relative">
+      <div class="max-w-4xl mx-auto space-y-10">
+        
+        <div class="text-center space-y-3">
+          <span class="text-xs font-cinzel tracking-[0.3em] uppercase text-red-400">
+            Strictly Confidential • For Mujahida’s Eyes Only
+          </span>
+          <h2 class="font-playfair text-3xl sm:text-5xl font-bold text-gold-gradient">
+            Ishaq’s Confession
+          </h2>
+          <p class="text-neutral-400 text-sm max-w-md mx-auto">
+            Untamed truths written in gold and velvet. Tap the crimson wax seal to break the pact and reveal his words.
+          </p>
+        </div>
+
+        <!-- Wax Sealed Envelope Container -->
+        <div class="relative w-full max-w-2xl mx-auto min-h-[500px]">
+          
+          <!-- Front Sealed Envelope View -->
+          <div id="envelope-cover" class="glass-panel-crimson rounded-3xl p-10 sm:p-14 border border-amber-500/30 flex flex-col items-center justify-center text-center space-y-8 relative overflow-hidden transition-all duration-700 shadow-2xl">
+            
+            <div class="absolute -top-12 -right-12 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-12 -left-12 w-48 h-48 bg-red-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+            <!-- Envelope Ribbon Graphic -->
+            <div class="w-full h-1 bg-gradient-to-r from-transparent via-amber-400/60 to-transparent"></div>
+
+            <div class="space-y-2">
+              <span class="font-cinzel text-xs tracking-[0.3em] text-amber-300 uppercase font-semibold">
+                Private Birthday Letter
+              </span>
+              <h3 class="font-playfair text-2xl sm:text-3xl font-bold text-neutral-100">
+                To My Irresistible Headache
+              </h3>
+              <p class="text-neutral-400 text-xs sm:text-sm font-light">
+                Bound with royal crimson wax and stamped by Ishaq.
+              </p>
+            </div>
+
+            <!-- The Wax Seal Button -->
+            <div class="pt-2 pb-4">
+              <button id="wax-seal-btn" class="wax-seal" title="Click to break seal and read">
+                <span class="font-cinzel text-lg font-black text-amber-300 tracking-wider">I&M</span>
+              </button>
+            </div>
+
+            <p class="text-[11px] font-mono tracking-widest uppercase text-amber-400/70 animate-pulse">
+              [ Tap Seal To Unveil His Heart ]
+            </p>
+
+            <div class="w-full h-1 bg-gradient-to-r from-transparent via-amber-400/60 to-transparent"></div>
+
+          </div>
+
+          <!-- Unfolded Letter Content (Revealed on click) -->
+          <div id="letter-content" class="letter-sheet rounded-3xl p-8 sm:p-12 space-y-6 relative hidden transition-all duration-700 opacity-0 border border-amber-500/40">
+            
+            <!-- Letter Header -->
+            <div class="flex items-center justify-between border-b border-amber-500/20 pb-4">
+              <div>
+                <span class="font-cinzel text-xs tracking-[0.25em] text-amber-400 uppercase font-semibold">
+                  Midnight Archives
+                </span>
+                <h3 class="font-playfair text-2xl font-bold text-neutral-100">
+                  My Dearest Mujahida,
+                </h3>
+              </div>
+              <button id="close-letter-btn" class="text-xs text-neutral-400 hover:text-amber-300 flex items-center gap-1 uppercase tracking-wider transition-colors">
+                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+                <span>Seal Back</span>
+              </button>
+            </div>
+
+            <!-- Letter Body with Deep Toxic Romance -->
+            <div class="font-playfair text-base sm:text-lg leading-relaxed text-neutral-200 space-y-4">
+              <p>
+                They say love is meant to be peaceful, gentle, and quiet. But whoever said that clearly never met us. What we have is a magnificent wildfire — uncontrollable, intoxicating, and completely unapologetic.
+              </p>
+              <p>
+                You know exactly how crazy you drive me. You test every nerve, you challenge every boundary, and somehow, in the middle of our storm, you remain the only place in the entire universe where I truly want to be. I wouldn’t trade one single fight with you for a lifetime of calm with anyone else.
+              </p>
+              <p>
+                On this birthday, I want you to remember who you are: a woman of undeniable power, beauty, and grace. You possess a fire that commands respect, eyes that leave no soul untouched, and a heart that belongs completely to me, just as mine belongs to you.
+              </p>
+              <p>
+                May this year bring you all the luxury, victory, and happiness you deserve. As long as I breathe, you will never fight the world alone. We will burn together, conquer together, and love without apologies.
+              </p>
+              <p class="font-cursive text-2xl sm:text-3xl text-amber-300 pt-3">
+                Happy Birthday, Mujahida. Forever your chaos and your shield.
+              </p>
+            </div>
+
+            <!-- Letter Signature -->
+            <div class="border-t border-amber-500/20 pt-4 flex items-center justify-between">
+              <div>
+                <div class="font-cinzel text-sm font-bold text-gold-gradient tracking-widest">
+                  — ISHAQ
+                </div>
+                <div class="text-[11px] text-neutral-400">
+                  Your Forever Addiction
+                </div>
+              </div>
+
+              <div class="w-10 h-10 rounded-full border border-amber-500/40 flex items-center justify-center bg-black/40 text-amber-400 font-cinzel text-xs font-bold">
+                I&M
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 5: THE FLAME VOW & BIRTHDAY TOAST
+         ========================================== -->
+    <section id="vow" class="py-20 px-4 sm:px-6 relative">
+      <div class="max-w-4xl mx-auto">
+        <div class="glass-panel-crimson rounded-3xl p-8 sm:p-12 border-amber-500/30 text-center space-y-8 relative overflow-hidden">
+          
+          <div class="space-y-2">
+            <span class="font-cinzel text-xs tracking-[0.3em] uppercase text-amber-400 font-semibold">
+              Interactive Eternal Pact
+            </span>
+            <h2 class="font-playfair text-3xl sm:text-4xl font-bold text-neutral-100">
+              The Flame of Ishaq & Mujahida
+            </h2>
+            <p class="text-neutral-400 text-sm max-w-lg mx-auto">
+              Press and hold to charge the toxic connection, or pop the champagne for a birthday explosion!
+            </p>
+          </div>
+
+          <!-- Flame Hold Button & Bar -->
+          <div class="max-w-md mx-auto space-y-4">
+            
+            <button id="flame-vow-btn" class="w-full py-4 px-6 rounded-2xl bg-black/60 border border-amber-400/40 hover:border-amber-400 text-amber-300 font-cinzel font-bold text-sm tracking-widest uppercase transition-all shadow-[0_0_20px_rgba(212,175,55,0.15)] active:scale-95 flex items-center justify-center gap-3">
+              <i data-lucide="zap" class="w-5 h-5 text-amber-400"></i>
+              <span>Hold To Ignite Our Vow</span>
+              <i data-lucide="flame" class="w-5 h-5 text-red-500"></i>
+            </button>
+
+            <!-- Charge Progress Bar -->
+            <div class="w-full h-2.5 bg-neutral-900 rounded-full overflow-hidden border border-white/10">
+              <div id="vow-fill-bar" class="h-full w-0 bg-gradient-to-r from-red-600 via-amber-400 to-yellow-500 transition-all duration-75"></div>
+            </div>
+
+            <div id="vow-status-text" class="text-xs font-mono text-neutral-400 tracking-wider">
+              Hold to solidify our eternal pact
+            </div>
+
+          </div>
+
+          <!-- Birthday Champagne Toast Button -->
+          <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button id="champagne-toast-btn" class="px-8 py-3 rounded-full bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 text-black font-cinzel font-bold text-xs tracking-[0.2em] uppercase hover:brightness-110 active:scale-95 transition-all shadow-[0_0_30px_rgba(212,175,55,0.4)] flex items-center gap-2.5">
+              <i data-lucide="wine" class="w-4 h-4"></i>
+              <span>Pop Birthday Champagne</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         FOOTER: MANDATORY "BUILT BY ASKAR DEV"
+         ========================================== -->
+    <footer class="border-t border-amber-500/20 bg-black/90 py-12 px-4 sm:px-6 relative z-10">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+        
+        <!-- Left: Brand statement -->
+        <div class="space-y-1">
+          <div class="font-cinzel text-base font-bold text-gold-gradient tracking-widest uppercase">
+            Ishaq & Mujahida
+          </div>
+          <p class="text-neutral-400 text-xs font-light tracking-wider">
+            An Intimate Toxic Romance Ode • Happy Birthday Queen Mujahida
+          </p>
+        </div>
+
+        <!-- Center: Sacred Seal Symbol -->
+        <div class="w-10 h-10 rounded-full border border-amber-400/30 flex items-center justify-center text-amber-300 font-cinzel text-xs font-bold shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+          ∞
+        </div>
+
+        <!-- Right: Explicit "Built by Askar dev" Credit -->
+        <div class="space-y-1 md:text-right">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border-amber-500/30 text-xs text-amber-300 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="font-medium tracking-wide">
+              Built by <strong class="text-white font-bold tracking-wider underline decoration-amber-400 underline-offset-4">Askar dev</strong>
+            </span>
+          </div>
+          <p class="text-[10px] text-neutral-400 tracking-wider">
+            Exclusively handcrafted for Ishaq & Mujahida
+          </p>
+        </div>
+
+      </div>
+    </footer>
+  </main>
+
+  <!-- Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
